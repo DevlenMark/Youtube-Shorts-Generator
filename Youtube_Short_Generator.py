@@ -37,4 +37,4 @@ def clipEditor(filename, start_time):
 
     final_clip.write_videofile('Youtube-Shorts-Generator/Final Short/final.mp4')
 
-videoShortGenerator('https://www.youtube.com/watch?v=iEiM-xn-baE')
+videoShortGenerator('https://www.youtube.com/watch?v=ozzoeMs9ks0')
