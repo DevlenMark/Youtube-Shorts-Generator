@@ -29,9 +29,9 @@ def videoDownloader(link):
     d_video = mp4_streams[-1]
 
     try:
-        # downloading the video
+        # downloading the video and returning its file path
         file_name = d_video.download(output_path=SAVE_PATH)
-        print('Video downloaded successfully!')
+        print("Video downloaded successfully!")
         return file_name
     except:
         print("Some Error!")
@@ -40,7 +40,7 @@ def videoDownloader(link):
 # Takes in a search query, search for the videos, and returns the link of top video
 def searchLinkOfVideo(videoTitle, results):
     # Search for a specific video with YouTube title
-    print('Searching ' + videoTitle + "....")
+    print("Searching " + videoTitle + "....")
     search_response = youtube.search().list(
         q=videoTitle,
         part='id,snippet',
@@ -61,13 +61,14 @@ def searchLinkOfVideo(videoTitle, results):
         ).execute()
 
         # Extract duration from the response
-        duration_iso = video_response["items"][0]["contentDetails"]["duration"]
+        duration_iso = video_response['items'][0]['contentDetails']['duration']
         # turns iso into seconds (Looks past the first 2 characters PT)
         duration_seconds = duration_iso[2:].replace('H', '*3600+').replace('M', '*60+').replace('S', '')
         duration_minutes = eval(duration_seconds) / 60
 
+        #Filters out Youtube Shorts, and videos that are less than a minute
         if duration_minutes > 1:
-            print(f"Video ID: {video_id}\nTitle: {video_title}\nDescription: {video_description}\nLink: {video_link}")
+            print(f"\Video ID: {video_id}\nTitle: {video_title}\nDescription: {video_description}\nLink: {video_link}")
             return video_link
 
     print("No videos longer than a minute found.")
